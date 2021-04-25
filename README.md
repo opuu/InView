@@ -1,1 +1,1 @@
-# InView
+# InView: Is it in viewport?
