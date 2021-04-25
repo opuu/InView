@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InView.js</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 1em;
+        }
+
+        /* masonry */
+        .masonry {
+            -webkit-column-count: 4;
+            -moz-column-count: 4;
+            column-count: 4;
+            -webkit-column-gap: 1em;
+            -moz-column-gap: 1em;
+            column-gap: 1em;
+            padding: 0;
+        }
+
+        .masonry .col {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            transition: 0.3s ease-in-out all;
+            margin-bottom: 0.5em;
+            border-radius: 10px;
+            font-size: 42px;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            opacity: 0;
+        }
+
+        @keyframes grow {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(0.95);
+            }
+
+            100% {
+
+                transform: scale(1);
+            }
+        }
+
+        .col.active {
+            animation: grow 1s infinite;
+        }
+
+        @media only screen and (max-width: 20rem) {
+            .masonry {
+                -webkit-column-count: 1;
+                -moz-column-count: 1;
+                column-count: 1;
+            }
+        }
+
+        @media only screen and (min-width: 20.0625rem) and (max-width: 48rem) {
+            .masonry {
+                -webkit-column-count: 2;
+                -moz-column-count: 2;
+                column-count: 2;
+            }
+        }
+
+        @media only screen and (min-width: 48.0625rem) and (max-width: 75rem) {
+            .masonry {
+                -webkit-column-count: 3;
+                -moz-column-count: 3;
+                column-count: 3;
+            }
+        }
+
+        @media only screen and (min-width: 75.0625rem) {
+            .masonry {
+                -webkit-column-count: 4;
+                -moz-column-count: 4;
+                column-count: 4;
+            }
+        }
+
+        .col.b {
+            height: 500px;
+            background: #ff0044;
+        }
+
+        .col.s {
+            height: 400px;
+            background: #0066ff;
+        }
+
+        .col.m {
+            height: 350px;
+            background: #00ff88;
+        }
+
+        .col.g {
+            height: 300px;
+            background: #ff6600;
+        }
+
+        .col.x {
+            height: 600px;
+            background: #1d1d1d;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="masonry">
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+        <div class="col x">0</div>
+        <div class="col m">0</div>
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col g">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col m">0</div>
+        <div class="col b">0</div>
+        <div class="col m">0</div>
+        <div class="col g">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col b">0</div>
+        <div class="col m">0</div>
+        <div class="col m">0</div>
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col g">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col m">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col s">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col s">0</div>
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col x">0</div>
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col m">0</div>
+        <div class="col s">0</div>
+        <div class="col s">0</div>
+        <div class="col s">0</div>
+        <div class="col g">0</div>
+        <div class="col m">0</div>
+        <div class="col m">0</div>
+        <div class="col s">0</div>
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col x">0</div>
+        <div class="col m">0</div>
+        <div class="col s">0</div>
+        <div class="col m">0</div>
+        <div class="col b">0</div>
+        <div class="col s">0</div>
+    </div>
+
+    <script type="module">
+        import InView from "../dist/inview.js";
+
+        new InView(".col")
+            .on("enter", (e) => {
+                e.target.classList.add("active");
+                e.target.innerText = e.percentage.toFixed(2) + "%";
+                e.target.style.opacity = e.percentage.toFixed(1) / 100;
+            })
+            .on("exit", (e) => {
+                e.target.classList.remove("active");
+            });
+    </script>
+</body>
+
+</html>

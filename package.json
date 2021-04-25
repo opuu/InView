@@ -1,0 +1,29 @@
+{
+  "name": "@opuu/inview",
+  "version": "1.0.0",
+  "description": "Check if element is visible in viewport",
+  "main": "/dist/inview.js",
+  "scripts": {
+    "build": "npx gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opuu/InView.git"
+  },
+  "keywords": [
+    "inview",
+    "viewport",
+    "aos"
+  ],
+  "author": "Opuu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opuu/InView/issues"
+  },
+  "homepage": "https://github.com/opuu/InView#readme",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0"
+  }
+}
