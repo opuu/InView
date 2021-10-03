@@ -1,7 +1,9 @@
 
 # InView: Is it in viewport?
 
-InView.js check if an element is visible in the viewport.
+Checks if an element is visible in the viewport.
+
+Lazyload any content, animate elements on scroll, infinite scrolling and many more things can be done with this simple, tiny library.
 
 ## Getting Started
 Using InView is easy.
