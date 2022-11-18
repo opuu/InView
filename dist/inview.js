@@ -17,6 +17,10 @@ export default class InView {
       this.items = document.querySelectorAll(selector);
     }
 
+    this.paused = false;
+
+    this.delay = 0;
+
     this.threshold = [];
     for (let i = 0; i <= 1; i += 0.01) {
       this.threshold.push(i);
@@ -26,10 +30,52 @@ export default class InView {
   }
 
   /**
+   * InView: Pause observing
+   * @returns {Object} this object to chain .on() methods.
+   * @example
+   * new InView(".selector").pause();
+   * new InView(".selector").pause().on("enter", () => {});
+   * new InView(".selector").pause().on("exit", () => {});
+   */
+  pause() {
+    this.paused = true;
+    return this;
+  }
+
+  /**
+   * InView: Resume observing
+   * @returns {Object} this object to chain .on() methods.
+   * @example
+   * new InView(".selector").pause().resume().on("enter", () => {});
+   * new InView(".selector").pause().resume().on("exit", () => {});
+   */
+  resume() {
+    this.paused = false;
+    return this;
+  }
+
+  /**
+   * InView: Set delay
+   * @param {Number} delay
+   * @returns {Object} this object to chain .on() methods.
+   * @example
+   * new InView(".selector").delay(1000).on("enter", () => {});
+   * new InView(".selector").delay(1000).on("exit", () => {});
+   */
+  setDelay(delay) {
+    this.delay = delay;
+    return this;
+  }
+
+  /**
    * InView: Event Listener
    * @param {String} event name of the event (enter or exit)
    * @param {Function} callback callback function with event parameter
    * @returns {Object} return this object to chain .on() methods.
+   * @example
+   * new InView(".selector").on("enter", () => {});
+   * new InView(".selector").on("exit", () => {});
+   * new InView(".selector").on("enter", () => {}).on("exit", () => {});
    */
   on(event, callback) {
     if (event === "enter" || event === "exit") {
@@ -55,11 +101,26 @@ export default class InView {
                  */
                 let e = {
                   percentage: entry.intersectionRatio * 100,
+                  rootBounds: entry.rootBounds,
+                  boundingClientRect: entry.boundingClientRect,
+                  intersectionRect: entry.intersectionRect,
                   target: entry.target,
                   time: entry.time,
                   event: event,
                 };
-                callback(e);
+
+                /**
+                 * Call the callback function if not paused and if delay is over
+                 */
+                if (!this.paused) {
+                  if (this.delay > 0) {
+                    setTimeout(() => {
+                      callback(e);
+                    }, this.delay);
+                  } else {
+                    callback(e);
+                  }
+                }
               }
             });
           },
@@ -72,6 +133,8 @@ export default class InView {
           // observe each item
           observer.observe(item);
         });
+      } else {
+        console.error("InView: IntersectionObserver not supported.");
       }
     } else {
       console.error("InView: Event name " + event + " is invalid.");
