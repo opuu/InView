@@ -100,3 +100,7 @@ Default delay is 0 ms.
 ```js
 elements.setDelay(100);
 ```
+
+## License
+
+MIT License
