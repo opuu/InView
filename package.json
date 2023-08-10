@@ -4,16 +4,18 @@
   "description": "Check if element is visible in viewport",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "main": "./dist/inview.umd.cjs",
   "module": "./dist/inview.js",
-    "exports": {
+  "exports": {
     ".": {
       "import": "./dist/inview.js",
       "require": "./dist/inview.umd.cjs"
     }
   },
+  "types": "./dist/src/inview.d.ts",
   "scripts": {
     "build": "vite build"
   },
