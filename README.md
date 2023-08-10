@@ -228,7 +228,7 @@ MIT License
 
 ## Author
 
-[Opuu](https://opu.rocks)
+[Obaydur Rahman](https://opu.rocks)
 
 ## References
 
