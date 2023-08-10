@@ -2,9 +2,22 @@
   "name": "@opuu/inview",
   "version": "1.1.0",
   "description": "Check if element is visible in viewport",
-  "main": "/dist/inview.js",
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "./dist/inview.umd.cjs",
+  "module": "./dist/inview.js",
+  "exports": {
+    ".": {
+      "import": "./dist/inview.js",
+      "require": "./dist/inview.umd.cjs"
+    }
+  },
+  "types": "./dist/src/inview.d.ts",
   "scripts": {
-    "build": "npx gulp build"
+    "build": "vite build"
   },
   "repository": {
     "type": "git",
@@ -22,8 +35,8 @@
   },
   "homepage": "https://github.com/opuu/InView#readme",
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-minify": "^3.1.0"
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9",
+    "vite-plugin-dts": "^3.5.1"
   }
 }
