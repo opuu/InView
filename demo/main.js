@@ -1,4 +1,4 @@
-import { InView } from "../dist/inview.js";
+import InView from "../dist/inview.js";
 
 let elements = new InView({
     selector: ".col",
