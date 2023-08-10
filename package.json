@@ -1,6 +1,6 @@
 {
   "name": "@opuu/inview",
-  "version": "1.1.0",
+  "version": "2.0.1",
   "description": "Check if element is visible in viewport",
   "type": "module",
   "files": [
@@ -9,15 +9,22 @@
   ],
   "main": "./dist/inview.umd.cjs",
   "module": "./dist/inview.js",
+  "types": "./dist/src/inview.d.ts",
   "exports": {
     ".": {
       "import": "./dist/inview.js",
-      "require": "./dist/inview.umd.cjs"
+      "require": "./dist/inview.umd.cjs",
+      "types": "./dist/src/inview.d.ts"
     }
   },
-  "types": "./dist/src/inview.d.ts",
   "scripts": {
     "build": "vite build"
+  },
+  "author": "Opuu",
+  "license": "MIT",
+  "homepage": "https://github.com/opuu/InView#readme",
+  "bugs": {
+    "url": "https://github.com/opuu/InView/issues"
   },
   "repository": {
     "type": "git",
@@ -28,12 +35,6 @@
     "viewport",
     "aos"
   ],
-  "author": "Opuu",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/opuu/InView/issues"
-  },
-  "homepage": "https://github.com/opuu/InView#readme",
   "devDependencies": {
     "typescript": "^5.1.6",
     "vite": "^4.4.9",
