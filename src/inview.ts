@@ -18,9 +18,9 @@
  */
 interface InViewConfig {
   selector: string;
-  delay: number | undefined;
-  precision: "low" | "medium" | "high" | undefined;
-  single: boolean | undefined;
+  delay?: number;
+  precision?: "low" | "medium" | "high";
+  single?: boolean;
 }
 
 /**
@@ -303,4 +303,5 @@ class InView {
   }
 }
 
-export { InView, InViewConfig, InViewEvent };
+export default InView;
+export { InViewConfig, InViewEvent };
