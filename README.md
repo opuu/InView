@@ -1,5 +1,7 @@
 # InView: Is it in viewport?
 
+[![](https://data.jsdelivr.com/v1/package/npm/@opuu/inview/badge)](https://www.jsdelivr.com/package/npm/@opuu/inview)
+
 A library to checks if an element is visible in the viewport.
 
 Lazyload any content, animate elements on scroll, infinite scrolling and many more things can be done with this simple, tiny library.
