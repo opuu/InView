@@ -124,6 +124,8 @@ InView provides two Vue directives for easy integration with Vue components.
 #### Global directive
 
 ```js
+import { createInViewDirective, createOutViewDirective } from "@opuu/inview/vue";
+
 const app = createApp(App);
 
 app.directive("inview", createInViewDirective({ delay: 100, precision: "high", single: true }));
