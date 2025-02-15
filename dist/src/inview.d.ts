@@ -179,4 +179,4 @@ declare class InView {
     on(event: "enter" | "exit", callback: CallableFunction): InView;
 }
 export default InView;
-export { InViewConfig, InViewEvent };
+export type { InViewConfig, InViewEvent };
