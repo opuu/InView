@@ -1,6 +1,6 @@
 {
   "name": "@opuu/inview",
-  "version": "2.1.0-beta.3",
+  "version": "2.1.0",
   "description": "Check if element is visible in viewport",
   "type": "module",
   "files": [
