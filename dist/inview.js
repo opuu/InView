@@ -97,11 +97,11 @@ class n {
    */
   on(e, s) {
     if ("IntersectionObserver" in window) {
-      var i = new IntersectionObserver(
+      const i = new IntersectionObserver(
         (r) => {
           r.forEach((t) => {
             if (e === "enter" && t.intersectionRatio > 0 || e === "exit" && t.intersectionRatio === 0) {
-              let o = {
+              const o = {
                 percentage: t.intersectionRatio * 100,
                 rootBounds: t.rootBounds,
                 boundingClientRect: t.boundingClientRect,

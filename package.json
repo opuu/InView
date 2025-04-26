@@ -1,31 +1,39 @@
 {
   "name": "@opuu/inview",
-  "version": "2.0.1",
+  "version": "2.1.0-beta.3",
   "description": "Check if element is visible in viewport",
   "type": "module",
   "files": [
     "dist",
     "src"
   ],
-  "main": "./dist/inview.umd.cjs",
+  "main": "./dist/inview.cjs",
   "module": "./dist/inview.js",
   "types": "./dist/src/inview.d.ts",
   "exports": {
     ".": {
       "types": "./dist/src/inview.d.ts",
       "import": "./dist/inview.js",
-      "require": "./dist/inview.umd.cjs"
+      "require": "./dist/inview.cjs"
+    },
+    "./vue": {
+      "types": "./dist/src/inview-vue.d.ts",
+      "import": "./dist/inview-vue.js",
+      "require": "./dist/inview-vue.cjs"
     }
   },
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts"
   },
-  "author": "Opuu",
+  "author": {
+    "name": "Opuu",
+    "url": "https://github.com/opuu"
+  },
   "license": "MIT",
-  "homepage": "https://github.com/opuu/InView#readme",
-  "bugs": {
-    "url": "https://github.com/opuu/InView/issues"
-  },
+  "homepage": "https://github.com/opuu/InView",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/opuu/InView.git"
@@ -33,16 +41,27 @@
   "keywords": [
     "inview",
     "viewport",
-    "aos"
+    "aos",
+    "vue",
+    "in-view",
+    "scroll",
+    "intersection-observer",
+    "visibility"
   ],
   "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "eslint": "^9.25.1",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.0",
     "vite": "^6.3.3",
-    "vite-plugin-dts": "^4.5.3"
+    "vite-plugin-dts": "^4.5.3",
+    "vue": "^3.5.13"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "eslint"
     ]
   }
 }
