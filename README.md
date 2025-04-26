@@ -19,22 +19,22 @@
 
 ## 📚 Table of Contents
 
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [API Reference](#api-reference)
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [API Reference](#-api-reference)
     - [Constructor](#constructor)
     - [InViewConfig Interface](#inviewconfig-interface)
     - [Methods](#methods)
     - [InViewEvent Object](#inviewevent-object)
-- [Examples](#examples)
+- [Examples](#-examples)
     - [Basic Usage](#basic-usage)
     - [Advanced Configuration](#advanced-configuration)
     - [TypeScript Example](#typescript-example)
     - [Vue.js Integration](#vuejs-integration)
-- [Browser Support](#browser-support)
-- [License](#license)
-- [Author](#author)
-- [References](#references)
+- [Browser Support](#-browser-support)
+- [License](#-license)
+- [Author](#-author)
+- [References](#-references)
 
 ---
 
