@@ -1,40 +1,76 @@
-# InView: Is it in viewport?
+# InView: Detect Element Visibility in the Viewport
+
+**InView** is a lightweight, high-performance JavaScript library for detecting when elements enter or exit the viewport. Perfect for lazy loading, scroll-triggered animations, infinite scrolling, and more.
 
 [![](https://data.jsdelivr.com/v1/package/npm/@opuu/inview/badge)](https://www.jsdelivr.com/package/npm/@opuu/inview)
 
-A library to checks if an element is visible in the viewport.
+---
 
-Lazyload any content, animate elements on scroll, infinite scrolling and many more things can be done with this simple, tiny library.
+## 🚀 Features
 
-## Getting Started
+- **Simple API**: Intuitive and flexible configuration
+- **TypeScript Support**: Complete type definitions included
+- **Vue.js Integration**: Custom directives for seamless usage
+- **High Performance**: Minimal overhead, efficient observation
+- **Customizable**: Precision, delay, and single/multi-element support
+- **Modern Browser Support**: Built on Intersection Observer API
 
-Using InView is easy.
+---
 
-### Install
+## 📚 Table of Contents
 
-Install it from npm, pnpm or yarn
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [API Reference](#api-reference)
+    - [Constructor](#constructor)
+    - [InViewConfig Interface](#inviewconfig-interface)
+    - [Methods](#methods)
+    - [InViewEvent Object](#inviewevent-object)
+- [Examples](#examples)
+    - [Basic Usage](#basic-usage)
+    - [Advanced Configuration](#advanced-configuration)
+    - [TypeScript Example](#typescript-example)
+    - [Vue.js Integration](#vuejs-integration)
+- [Browser Support](#browser-support)
+- [License](#license)
+- [Author](#author)
+- [References](#references)
+
+---
+
+## 📦 Installation
+
+Install via your preferred package manager:
 
 ```bash
 npm install @opuu/inview
-```
-
-```bash
+# or
 pnpm install @opuu/inview
-```
-
-```bash
+# or
 yarn add @opuu/inview
 ```
 
+Or use via CDN:
+
+```html
+<script type="module">
+	import InView from "https://cdn.jsdelivr.net/npm/@opuu/inview/dist/inview.js";
+</script>
+```
+
+---
+
+## ⚡ Quick Start
+
 ### Import
 
-For module bundlers like webpack, rollup, parcel, etc.
+**For module bundlers (webpack, rollup, parcel, etc.):**
 
 ```js
 import InView from "@opuu/inview";
 ```
 
-For browsers that support ES modules, you can use the script tag with `type="module"`.
+**For browsers with ES module support:**
 
 ```html
 <script type="module">
@@ -42,56 +78,152 @@ For browsers that support ES modules, you can use the script tag with `type="mod
 </script>
 ```
 
-Or you can directly import it from CDN.
+Or use the CDN snippet above.
 
-```html
-<script>
-	import InView from "https://cdn.jsdelivr.net/npm/@opuu/inview/dist/inview.js";
-</script>
+---
+
+## 🛠️ API Reference
+
+### Constructor
+
+Create a new InView instance by passing a CSS selector or a configuration object:
+
+```js
+const inview = new InView(selectorOrConfig);
 ```
 
-### Usage
+- `selectorOrConfig`: `string` (CSS selector) or [`InViewConfig`](#inviewconfig-interface) object
 
-You can use InView in two ways.
+---
 
-Directly selecting the elements
+### InViewConfig Interface
+
+Configure observation with the following options:
+
+```ts
+interface InViewConfig {
+	selector: string;
+	delay?: number;
+	precision?: "low" | "medium" | "high";
+	single?: boolean;
+}
+```
+
+| Property  | Type                        | Default  | Description                             |
+| --------- | --------------------------- | -------- | --------------------------------------- |
+| selector  | string                      | —        | CSS selector for elements to observe    |
+| delay     | number                      | 0        | Delay (ms) before triggering callbacks  |
+| precision | "low" \| "medium" \| "high" | "medium" | Intersection precision                  |
+| single    | boolean                     | false    | Observe only the first matching element |
+
+---
+
+### Methods
+
+#### `on(event, callback)`
+
+Listen for `"enter"` or `"exit"` events:
+
+```js
+inview.on("enter", (event) => {
+	// Element entered viewport
+});
+inview.on("exit", (event) => {
+	// Element exited viewport
+});
+```
+
+- `event`: `"enter"` or `"exit"`
+- `callback`: `(event: InViewEvent) => void`
+
+#### `pause()`
+
+Pause observation:
+
+```js
+inview.pause();
+```
+
+#### `resume()`
+
+Resume observation:
+
+```js
+inview.resume();
+```
+
+#### `setDelay(delay)`
+
+Set callback delay (in ms):
+
+```js
+inview.setDelay(200);
+```
+
+---
+
+### InViewEvent Object
+
+The callback for `"enter"` and `"exit"` receives an `InViewEvent` object:
+
+```ts
+interface InViewEvent {
+	percentage: number;
+	rootBounds: DOMRectReadOnly | null;
+	boundingClientRect: DOMRectReadOnly;
+	intersectionRect: DOMRectReadOnly;
+	target: Element;
+	time: number;
+	event: "enter" | "exit";
+}
+```
+
+| Property           | Type                    | Description                      |
+| ------------------ | ----------------------- | -------------------------------- |
+| percentage         | number                  | % of element visible in viewport |
+| rootBounds         | DOMRectReadOnly \| null | Viewport rectangle               |
+| boundingClientRect | DOMRectReadOnly         | Element's rectangle              |
+| intersectionRect   | DOMRectReadOnly         | Intersection rectangle           |
+| target             | Element                 | Observed element                 |
+| time               | number                  | Event timestamp                  |
+| event              | "enter" \| "exit"       | Event type                       |
+
+---
+
+## 🧑‍💻 Examples
+
+### Basic Usage
+
+#### Observe Elements by Selector
 
 ```js
 const elements = new InView(".css-selector");
 
 elements.on("enter", (event) => {
-	console.log(event);
-	// do something on enter
+	// Element entered viewport
 });
 
 elements.on("exit", (event) => {
-	console.log(event);
-	// do something on exit
+	// Element exited viewport
 });
 ```
 
-or configuring it for more control.
+---
+
+### Advanced Configuration
 
 ```js
 const element = new InView({
 	selector: ".css-selector",
-	delay: 100,
-	precision: "high",
-	single: true,
-});
-
-element.on("enter", (event) => {
-	console.log(event);
-	// do something on enter
-});
-
-element.on("exit", (event) => {
-	console.log(event);
-	// do something on exit
+	delay: 100, // ms delay before callback
+	precision: "high", // "low" | "medium" | "high"
+	single: true, // Observe only the first match
 });
 ```
 
-For TypeScript users, you can import the types and use it like this.
+---
+
+### TypeScript Example
 
 ```ts
 import InView from "@opuu/inview";
@@ -107,160 +239,60 @@ const config: InViewConfig = {
 const element: InView = new InView(config);
 
 element.on("enter", (event: InViewEvent) => {
-	console.log(event);
-	// do something on enter
-});
-
-element.on("exit", (event: InViewEvent) => {
-	console.log(event);
-	// do something on exit
+	// Handle enter event
 });
 ```
 
-### Usage with Vue
+---
 
-InView provides two Vue directives for easy integration with Vue components.
+### Vue.js Integration
 
-#### Global directive
+InView provides Vue directives for easy integration.
+
+#### Register Directives Globally
 
 ```js
 import { createInViewDirective, createOutViewDirective } from "@opuu/inview/vue";
-
 const app = createApp(App);
 
 app.directive("inview", createInViewDirective({ delay: 100, precision: "high", single: true }));
 app.directive("outview", createOutViewDirective());
-
-app.mount("#app");
 ```
+
+#### Usage in Templates
 
 ```html
 <template>
 	<div v-inview="onEnterHandler" v-outview="onExitHandler">
-		<!-- your content -->
+		<!-- Content -->
 	</div>
 </template>
 ```
 
-> Note: If the directive is used in only one component, you can register the directive locally in the component instead of globally.
+> You can also register directives locally within a component.
 
-### Methods
+---
 
-#### constructor(config: InViewConfig | string): InView
+## 🌐 Browser Support
 
-Create a new instance of InView.
+InView uses the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API), supported by all modern browsers.  
+[See browser compatibility](https://caniuse.com/intersectionobserver).
 
-```js
-const elements = new InView(".css-selector");
-```
+---
 
-or
-
-```js
-const element = new InView({
-	selector: ".css-selector",
-	delay: 100,
-	precision: "high",
-	single: true,
-});
-```
-
-The config object is an instance of `InViewConfig` interface. Here are the properties of the config object and their default values.
-
-| Property  | Type                        | Required | Default  | Description                                                    |
-| :-------- | :-------------------------- | :------- | :------- | :------------------------------------------------------------- |
-| selector  | string                      | true     |          | CSS selector for the elements to observe.                      |
-| delay     | number                      | false    | 0        | Delay in milliseconds for callback.                            |
-| precision | "low" \| "medium" \| "high" | false    | "medium" | Precision of the intersection observer.                        |
-| single    | boolean                     | false    | false    | Whether to observe only the first element or all the elements. |
-
-Here is the interface for the config object.
-
-```ts
-interface InViewConfig {
-	selector: string;
-	delay?: number;
-	precision?: "low" | "medium" | "high";
-	single?: boolean;
-}
-```
-
-#### on(event: "enter" | "exit", callback: CallableFunction): InView
-
-Add event listener for enter and exit events.
-
-```js
-elements.on("enter", (event) => {
-	console.log(event);
-	// do something on enter
-});
-
-elements.on("exit", (event) => {
-	console.log(event);
-	// do something on exit
-});
-```
-
-The event object is an instance of `InViewEvent` interface. Here are the properties of the event object.
-
-| Property           | Type                    | Description                                                                              |
-| :----------------- | :---------------------- | :--------------------------------------------------------------------------------------- |
-| percentage         | number                  | Percentage of the element visible in the viewport.                                       |
-| rootBounds         | DOMRectReadOnly \| null | The rectangle that is used as the intersection observer's viewport.                      |
-| boundingClientRect | DOMRectReadOnly         | The rectangle describing the element's size and position relative to the viewport.       |
-| intersectionRect   | DOMRectReadOnly         | The rectangle describing the intersection between the observed element and the viewport. |
-| target             | Element                 | The observed element.                                                                    |
-| time               | number                  | The time at which the event was triggered.                                               |
-| event              | "enter" \| "exit"       | The event type.                                                                          |
-
-Here is the interface for the event object.
-
-```ts
-interface InViewEvent {
-	percentage: number;
-	rootBounds: DOMRectReadOnly | null;
-	boundingClientRect: DOMRectReadOnly;
-	intersectionRect: DOMRectReadOnly;
-	target: Element;
-	time: number;
-	event: "enter" | "exit";
-}
-```
-
-#### pause() : InView
-
-Pause observing.
-
-```js
-elements.pause();
-```
-
-#### resume() : InView
-
-Resume observing.
-
-```js
-elements.resume();
-```
-
-#### setDelay(delay = 0) : InView
-
-Set delay for callback.
-Default delay is 0 ms.
-
-```js
-elements.setDelay(100);
-```
-
-## License
+## 📄 License
 
 MIT License
 
-## Author
+---
+
+## 👤 Author
 
 [Obaydur Rahman](https://opu.rocks)
 
-## References
+---
 
-- [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
-- [Intersection Observer API - Browser Support](https://caniuse.com/intersectionobserver)
+## 🔗 References
+
+- [Intersection Observer API (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
+- [Browser Support: caniuse.com](https://caniuse.com/intersectionobserver)
